@@ -23,30 +23,41 @@ _n_noop:1,2
 _nx_noop:1,2,3c
 
 <?php /**---------Дата-ссылка для постов--------------------------------------*/ ?>
+________________1_____________________
 
 <?php if ( is_singular() ) {
-	$_date_link = get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) );
+	$_date_link = esc_url( get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) );
 } else {
-	$_date_link = get_the_permalink();
+	$_date_link = esc_url( get_the_permalink() );
 } ?>
-<a href="<?php echo esc_url( $_date_link ); ?>" title="<?php the_title_attribute(); ?>"><?php echo get_the_date(); ?></a>
-_____________________________________
+<a href="<?php echo $_date_link; ?>" title="<?php the_title_attribute(); ?>"><?php echo get_the_date(); ?></a>
+_________________2____________________
 
 <?php if ( is_singular() ) { ?>
 	<a href="<?php echo esc_url( get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) ); ?>" title="<?php the_title_attribute(); ?>"><?php echo get_the_date(); ?></a>
 <?php } else { ?>
 	<a href="<?php echo esc_url( get_the_permalink() ); ?>" title="<?php the_title_attribute(); ?>"><?php echo get_the_date(); ?></a>
 <?php } ?>
-_____________________________________
+__________________3___________________
 
 <?php if ( is_singular() ) {
 	echo '<a href="' . esc_url( get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) ) . '" title="' . the_title_attribute( 'echo=0' ) . '">' . get_the_date() . '</a>';
 } else {
 	echo '<a href="' . esc_url( get_the_permalink() ) . '" title="' . the_title_attribute( 'echo=0' ) . '">' . get_the_date() . '</a>';
 } ?>
-_____________________________________
+___________________4__________________
+
+<?php if ( is_singular() ) {
+	printf( '<a href="%1$s" title="%2$s">%3$s</a>', esc_url( get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) ), the_title_attribute( 'echo=0' ), get_the_date() );
+} else {
+	printf( '<a href="%1$s" title="%2$s">%3$s</a>', esc_url( get_the_permalink() ), the_title_attribute( 'echo=0' ), get_the_date() );
+} ?>
+____________________5_________________
 
 <a href="<?php echo esc_url( ( is_singular() ) ? get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) : get_the_permalink() ); ?>" title="<?php the_title_attribute(); ?>"><?php echo get_the_date(); ?></a>
+_____________________6________________
+
+<?php printf( '<a href="%1$s" title="%2$s">%3$s</a>', esc_url( ( is_singular() ) ? get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) : get_the_permalink() ), the_title_attribute( 'echo=0' ), get_the_date() ); ?>
 
 
 <?php echo esc_url( get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) ); ?>
@@ -76,4 +87,4 @@ if ( proverka_formata_dati( $data1 ) ) {
 	echo 'Верный формат даты.';
 } else {
 	echo 'Неверный формат даты. Введите дату в формате ГГГГ-ММ-ДД';
-}
+} ?>
