@@ -59,21 +59,21 @@ _____________________________________
 	the_title( '<a href="' . get_the_permalink() . '">', '</a>' );
 } ?>
 
+<?php /*---------Проверка формата даты--------------------------------------*/ ?>
 
-Donate link: http://bestwebsoft.com/donate/
+<?php
+function ProverkaFormataDati( $date ) {
+	$pattern = "/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/"; // Основной 2013-10-22
+	if ( preg_match( $pattern, $date, $date_part ) ) {
+		return checkdate( $date_part[2], $date_part[3], $date_part[1] );
+	} else {
+		return false;
+	}
+}
 
-== Changelog ==
-
-= V1.8 - 18.08.2016 =
-* Update : All functionality for WordPress 4.6 was updated.
-
-== Upgrade Notice ==
-
-= V1.8 =
-* The compatibility with new WordPress version updated.
-
-WP Theme Archy v1.8 - All functionality for WordPress 4.6 was updated."
-WP Theme Best v1.4 - All functionality for WordPress 4.6 was updated."
-svn ci -m "WP Theme Bicubic v1.8 - All functionality for WordPress 4.6 was updated."
-svn ci -m "WP Theme Blogotron v2.0 - Fixed wp_title."
-svn ci -m "WP Theme Cafe v1.7 - All functionality for WordPress 4.6 was updated."
+$data1 = "22-10-2013";
+if ( ProverkaFormataDati( $data1 ) ) {
+	echo "Верный формат даты.";
+} else {
+	echo "Неверный формат даты. Введите дату в формате ГГГГ-ММ-ДД";
+}
