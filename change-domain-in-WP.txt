@@ -1,0 +1,9 @@
+MySQL запрос при переносе WordPress на другой домен
+
+'http://old_domain', 'http://new_domain'
+
+UPDATE wp_options SET option_value = replace(option_value, 'http://old_domain', 'http://new_domain') WHERE option_name = 'home' OR option_name = 'siteurl';
+
+UPDATE wp_posts SET post_content = replace(post_content, 'http://old_domain', 'http://new_domain');
+
+UPDATE wp_postmeta SET meta_value = REPLACE (meta_value, 'http://old_domain', 'http://new_domain');
