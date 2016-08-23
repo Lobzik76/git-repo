@@ -88,3 +88,21 @@ if ( proverka_formata_dati( $data1 ) ) {
 } else {
 	echo 'Неверный формат даты. Введите дату в формате ГГГГ-ММ-ДД';
 } ?>
+
+<?php /**---------Открытие/закрытие кастомных селектов-----------------------*/ ?>
+<script>
+	$( document ).on( 'click', function( e ) {
+		var container1 = $( '.mdclcntr-select' );
+		if ( !container1.is( e.target ) && container1.has( e.target ).length === 0 ) {
+			container1.find( '.select-options' ).hide();
+		} else if ( container1.is( e.target ) || container1.has( e.target ).length !== 0 ) {
+			var container2 = $( e.target ).closest( '.mdclcntr-select' );
+			if ( container2.find( '.select-options' ).is( ':visible' ) ) {
+				container2.find( '.select-options' ).hide();
+			} else {
+				container1.find( '.select-options' ).hide();
+				container2.find( '.select-options' ).show();
+			}
+		}
+	} );
+</script>
